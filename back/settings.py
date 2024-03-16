@@ -88,7 +88,7 @@ import dj_database_url
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -97,10 +97,10 @@ DATABASES = {
 }
 """
 DATABASES = {
-    'default': dj_database_url.parse()
+    'default': dj_database_url.parse('postgres://postgres.mermokioeeszbxwesijb:7rsqfGa6BIBrNJkW@aws-0-eu-central-1.pooler.supabase.com:5432/postgres')
 }
 
-"""
+
 
 
 # Password validation
