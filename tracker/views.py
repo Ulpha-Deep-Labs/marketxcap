@@ -3,9 +3,10 @@ from rest_framework.response import Response
 from django.utils import timezone
 from datetime import timedelta
 from .models import Commodity, CommodityName
+from django.db.models import Max
 
 from .models import Commodity
-from .serializers import CommoditySerializer, CommodityCreateSerializer
+from .serializers import CommoditySerializer, CommodityCreateSerializer, CommodityDefaultSerializer
 
 
 # Create your views here.
@@ -43,4 +44,15 @@ class CommodityDetailsAPIView(generics.ListAPIView):
 class CommodityCreateAPIView(generics.CreateAPIView):
     queryset = Commodity.objects.all()
     serializer_class = CommodityCreateSerializer
+
+
+
+class LatestCommodityListAPIView(generics.ListAPIView):
+    serializer_class = CommodityDefaultSerializer
+
+    def get_queryset(self):
+        # Get the latest commodity entry for each commodity name
+        latest_commodities = Commodity.objects.order_by('name', '-time').distinct('name')
+
+        return latest_commodities
 

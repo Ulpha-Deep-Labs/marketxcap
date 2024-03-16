@@ -64,3 +64,19 @@ class CommodityCreateSerializer(serializers.ModelSerializer):
         # Create the commodity using the remaining validated data
         commodity = Commodity.objects.create(name=commodity_name_instance, **validated_data)
         return commodity
+    
+class CommodityDefaultSerializer(serializers.ModelSerializer):
+    name = CommodityNameSerialzer()
+    one_hour_percentage_change = serializers.SerializerMethodField()
+    class Meta:
+        model = Commodity
+        fields = ['name', 'current_price', 'time', 'one_hour_percentage_change']
+
+    def get_one_hour_percentage_change(self, instance):
+        current_price = instance.current_price
+        previous_price = instance.price_1_hour_ago  # Get the previous price
+        if previous_price is not None and current_price is not None and previous_price != 0:
+            percentage_change = ((current_price - previous_price) / previous_price) * 100
+            return percentage_change
+        else:
+            return None  # If any price is None or previous price is zero, return None

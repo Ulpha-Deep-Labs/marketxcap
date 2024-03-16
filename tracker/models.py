@@ -8,6 +8,7 @@ class CommodityName(models.Model):
     name = models.CharField(max_length=100)
     symbol = models.CharField(max_length=10)
     tradeable = models.BooleanField(default=False)
+    logo = models.ImageField(upload_to='logo/', null=True, blank=True)
 
 
     def __str__(self) -> str:
