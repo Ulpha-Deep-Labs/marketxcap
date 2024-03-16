@@ -7,7 +7,7 @@ import decimal
 class CommodityNameSerialzer(serializers.ModelSerializer):
     class Meta:
         model = CommodityName
-        fields = ['name', 'symbol']
+        fields = ['name', 'symbol', 'logo']
 
 
 class CommoditySerializer(serializers.ModelSerializer):
@@ -65,8 +65,15 @@ class CommodityCreateSerializer(serializers.ModelSerializer):
         commodity = Commodity.objects.create(name=commodity_name_instance, **validated_data)
         return commodity
     
+
+
+class CommodityNamesSerialzer(serializers.ModelSerializer):
+    class Meta:
+        model = CommodityName
+        fields = ['id', 'name', 'symbol', 'logo']
+    
 class CommodityDefaultSerializer(serializers.ModelSerializer):
-    name = CommodityNameSerialzer()
+    name = CommodityNamesSerialzer()
     one_hour_percentage_change = serializers.SerializerMethodField()
     class Meta:
         model = Commodity
