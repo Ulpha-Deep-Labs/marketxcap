@@ -1,15 +1,17 @@
 # serializers.py
 from rest_framework import serializers
-from .models import Commodity
+from .models import Commodity, CommodityName
 from datetime import timedelta
 import decimal
 
-# In your Django app's serializers.py file
+class CommodityNameSerialzer(serializers.ModelSerializer):
+    class Meta:
+        model = CommodityName
+        fields = ['name', 'symbol']
 
-from rest_framework import serializers
-from .models import Commodity
 
 class CommoditySerializer(serializers.ModelSerializer):
+    name = CommodityNameSerialzer()
     one_hour_percentage_change = serializers.SerializerMethodField()
     one_day_percentage_change = serializers.SerializerMethodField()
     one_week_percentage_change = serializers.SerializerMethodField()
@@ -49,6 +51,9 @@ class CommoditySerializer(serializers.ModelSerializer):
 
 
 
-    def to_representation(self, instance):
-        representation = super().to_representation(instance)
-        return {representation['name']: representation}
+
+class CommidityAddSeriazer(serializers.ModelSerializer):
+    class Meta:
+        model = Commodity
+        fields = ['id', 'name', 'current_price',  'time', 'one_hour_percentage_change', 'one_week_percentage_change', 'one_day_percentage_change']
+

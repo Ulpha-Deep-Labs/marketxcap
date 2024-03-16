@@ -1,10 +1,22 @@
 from django.db import models
 from django.utils import timezone
 
-# Create your models here.
-class Commodity(models.Model):
+
+
+
+class CommodityName(models.Model):
     name = models.CharField(max_length=100)
     symbol = models.CharField(max_length=10)
+    tradeable = models.BooleanField(default=False)
+
+
+    def __str__(self) -> str:
+        return self.name
+
+
+# Create your models here.
+class Commodity(models.Model):
+    name = models.ForeignKey(CommodityName, on_delete= models.CASCADE, related_name='commodity_name')
     current_price = models.DecimalField(max_digits=10, decimal_places=2)
     time = models.DateTimeField(auto_now=True)
     price_1_hour_ago = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)

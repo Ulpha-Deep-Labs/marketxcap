@@ -97,7 +97,7 @@ DATABASES = {
 }
 """
 DATABASES = {
-    'default': dj_database_url.parse('postgres://postgres.mermokioeeszbxwesijb:7rsqfGa6BIBrNJkW@aws-0-eu-central-1.pooler.supabase.com:5432/postgres')
+    'default': dj_database_url.parse('postgres://postgres.dqsuhbryzsfcvcrexldq:ftiudZgjGEDkhcho@aws-0-eu-central-1.pooler.supabase.com:5432/postgres')
 }
 
 

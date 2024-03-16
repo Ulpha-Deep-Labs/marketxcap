@@ -2,7 +2,7 @@ from rest_framework import generics
 from rest_framework.response import Response
 from django.utils import timezone
 from datetime import timedelta
-from .models import Commodity
+from .models import Commodity, CommodityName
 
 from .models import Commodity
 from .serializers import CommoditySerializer
@@ -28,7 +28,7 @@ class CommodityDetailsAPIView(generics.ListAPIView):
         # Group commodities by commodity_name
         grouped_commodities = {}
         for commodity in queryset:
-            commodity_name = commodity.name
+            commodity_name = commodity.name.name
             if commodity_name not in grouped_commodities:
                 grouped_commodities[commodity_name] = []
             grouped_commodities[commodity_name].append(commodity)
