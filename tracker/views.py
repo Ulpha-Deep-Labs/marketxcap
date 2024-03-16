@@ -5,8 +5,7 @@ from datetime import timedelta
 from .models import Commodity, CommodityName
 
 from .models import Commodity
-from .serializers import CommoditySerializer
-
+from .serializers import CommoditySerializer, CommodityCreateSerializer
 
 
 # Create your views here.
@@ -39,4 +38,9 @@ class CommodityDetailsAPIView(generics.ListAPIView):
             serialized_data[commodity_name] = self.serializer_class(commodities, many=True).data
 
         return Response(serialized_data)
+    
+
+class CommodityCreateAPIView(generics.CreateAPIView):
+    queryset = Commodity.objects.all()
+    serializer_class = CommodityCreateSerializer
 
