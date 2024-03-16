@@ -1,10 +1,9 @@
-from django.urls import path
+from django.urls import path, include
+from .views import RegistrationAPIView, PartialUpdateUserView, UserDetailsView, VerifyEmailAPIView, ResendOTPAPIView, PasswordResetAPIView, PasswordResetVerifyAPIView
 
 urlpatterns = [
    path('register', RegistrationAPIView.as_view(), name='registration_api'),
    path('verify-email', VerifyEmailAPIView.as_view(), name='Email_verifcation'),
-   path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-   path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
    path('oauth/', include('drf_social_oauth2.urls', namespace='drf')),
    path('update-user/', PartialUpdateUserView.as_view(), name='partial_update_user'),
    path('user-details/', UserDetailsView.as_view(), name='user_details'),
