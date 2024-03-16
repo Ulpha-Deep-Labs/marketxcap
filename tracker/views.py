@@ -1,4 +1,6 @@
-from rest_framework import generics
+import decimal
+
+from rest_framework import generics, status
 from rest_framework.response import Response
 
 from .models import Commodity, Price
@@ -16,3 +18,12 @@ class CommodityPriceListCreateView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         return Price.objects.filter(commodity=self.kwargs["pk"])
+
+    def post(self, request, *args, **kwargs):
+        serializer = PriceSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            commodity = Commodity.objects.filter(id=self.kwargs["pk"]).first()
+            commodity.update_prices(decimal.Decimal(serializer.data["amount"]))
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

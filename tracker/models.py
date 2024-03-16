@@ -9,8 +9,19 @@ class Commodity(models.Model):
     current_price = models.DecimalField(max_digits=10, decimal_places=2)
     percentage_change = models.DecimalField(max_digits=10, decimal_places=2)
 
+    def update_prices(self, new_price):
+        perc_change = self.calc_perc_change(new_price, self.current_price)
+        self.percentage_change = perc_change
+        self.current_price = new_price
+        self.save()
+
     def __str__(self):
         return f"{self.name} - ₦{self.symbol}"
+    
+    @classmethod
+    def calc_perc_change(cls, new_price, old_price):
+        return ((new_price - old_price) / old_price) * 100
+    
 
 
 class Price(models.Model):
