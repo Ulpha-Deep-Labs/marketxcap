@@ -42,11 +42,14 @@ INSTALLED_APPS = [
     'oauth2_provider',
     'social_django',
     'drf_social_oauth2',
+    'rest_framework',
 
     #internal
     'accounts',
-    'track'
+    'tracker'
 ]
+
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -81,6 +84,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'back.wsgi.application'
 
 
+import dj_database_url
+
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
@@ -90,6 +95,12 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+"""
+DATABASES = {
+    'default': dj_database_url.parse()
+}
+
+"""
 
 
 # Password validation
@@ -146,3 +157,19 @@ AUTHENTICATION_BACKENDS = (
    'drf_social_oauth2.backends.DjangoOAuth2',
    'django.contrib.auth.backends.ModelBackend',
 )
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+'EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend" '
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'elinteerie@gmail.com'  # Your Gmail email address
+EMAIL_HOST_PASSWORD = 'hoahdwedzjrllrxl'  # The app password you generated
+
+CSRF_COOKIE_SECURE = False
+CSRF_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SECURE = False
+
+
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
