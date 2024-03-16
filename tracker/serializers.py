@@ -55,8 +55,8 @@ class CommoditySerializer(serializers.ModelSerializer):
 class CommodityCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Commodity
-        fields = ['name', 'current_price', 'time', 'price_1_hour_ago', 'price_1_day_ago', 'price_7_days_ago']
-        #read_only_fields = ['name']
+        fields = ['name', 'current_price', 'time']
+        read_only_fields = ['price_1_hour_ago', 'price_1_day_ago', 'price_7_days_ago']
 
     def create(self, validated_data):
         # Extract the commodity_name instance from the validated data
