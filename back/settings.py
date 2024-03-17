@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'social_django',
     'drf_social_oauth2',
     'rest_framework',
+    'corsheaders',
 
     #internal
     'accounts',
@@ -53,7 +55,9 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -97,7 +101,7 @@ DATABASES = {
 }
 """
 DATABASES = {
-    'default': dj_database_url.parse('postgres://postgres.mermokioeeszbxwesijb:7rsqfGa6BIBrNJkW@aws-0-eu-central-1.pooler.supabase.com:5432/postgres')
+    'default': dj_database_url.parse('postgres://postgres.dqsuhbryzsfcvcrexldq:ftiudZgjGEDkhcho@aws-0-eu-central-1.pooler.supabase.com:5432/postgres')
 }
 """
 
@@ -138,6 +142,11 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+MEDIA_URL = '/mediafiles/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -172,3 +181,26 @@ SESSION_COOKIE_SECURE = False
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_CREDENTIALS = True
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None
+CSRF_TRUSTED_ORIGINS =[
+    'https://localhost',
+    'http://localhost',
+    'http://127.0.0.1:8000',
+    'http://127.0.0.1',
+    
+    
+
+]
+
+
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+    "default": {
+        "BACKEND": 'django.core.files.storage.FileSystemStorage'
+    }
+}
+
