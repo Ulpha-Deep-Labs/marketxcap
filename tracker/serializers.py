@@ -87,3 +87,9 @@ class CommodityDefaultSerializer(serializers.ModelSerializer):
             return percentage_change
         else:
             return None  # If any price is None or previous price is zero, return None
+        
+
+class CommodityASerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Commodity
+        fields = ['current_price', 'time', 'price_1_hour_ago', 'price_1_day_ago', 'price_7_days_ago']
