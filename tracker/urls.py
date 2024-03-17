@@ -1,11 +1,9 @@
 from django.urls import path, include
-from .views import CommodityListCreateView, CommodityDetailsAPIView, CommodityCreateAPIView, LatestCommodityListAPIView
+from .views import CommodityListCreateView, CommodityPriceListCreateView
 
 urlpatterns = [
-   #path("", CommodityListCreateView.as_view(), name="commodity-list-create"),
-   path('', CommodityDetailsAPIView.as_view(), name='commodity-details'),
-   path('create/', CommodityCreateAPIView.as_view(), name='create-commodity'),
-   path('default/', LatestCommodityListAPIView.as_view(), name='view-commodity'),
+   path("", CommodityListCreateView.as_view(), name="commodity-list-create"),
+   path("<int:pk>/", CommodityPriceListCreateView.as_view(), name='commodity-details'),
 ]       
 
 
