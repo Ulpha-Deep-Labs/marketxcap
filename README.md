@@ -1,4 +1,4 @@
-**MarketXCap** – a revolutionary platform designed to revolutionize the way Nigerians invest, trade, and access market data. At its core, MarketXCap is more than just a marketplace; it is a catalyst for change, a vehicle for empowerment, and a testament to the transformative power of technology in Nigeria's economic landscape.
+MarketXCap is your all-in-one platform for tracking and trading commodities and digital assets. With real-time price updates and comprehensive market analysis, MarketXCap empowers traders and consumers alike to make informed decisions. Whether you're a seasoned investor or just starting out, our user-friendly interface and educational resources make navigating commodity markets easy and accessible. From rice to fuel to digitised commodities, we've got you covered. Join MarketXCap today and take control of your financial future!"
 
 ***pip install requirements.txt***
 
