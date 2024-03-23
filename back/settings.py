@@ -48,7 +48,7 @@ INSTALLED_APPS = [
 
     #internal
     'accounts',
-    'tracker'
+    'commodities'
 ]
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
